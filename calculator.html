@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCR Slider</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  .slider-container {
+    text-align: center;
+    padding: 20px 50px; /* Reduced top/bottom padding, left/right remains the same */
+    height: 200px; /* Allow for variable content size */
+    background-color: #eefcff;
+    border-radius: 15px;
+    width: 65%;
+    max-width: 150px;
+    margin: auto; /* Center the container elegantly, less space above */
+    border: 1px solid #ccc; /* Subtle border for defined edges */
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 7.5px;
+    background: #0a6e8e;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity .2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #a5d8e5;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    background: #009688;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #4db6ac;
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+  }
+
+  .slider-value {
+    margin-top: 20px;
+    font-size: 18px;
+    font-family: 'Avenir', sans-serif;
+    color: #0a6e8e;
+    width: 100%; /* Ensures alignment */
+    display: flex; /* Flexbox to center content and manage space */
+    justify-content: center; /* Center horizontally */
+  }
+
+  .slider-value span {
+    min-width: 50px; /* Minimum width to handle size change without resizing box */
+    text-align: center; /* Center text */
+    font-weight: bold;
+    color: #0a6e8e;
+  }
+  h1 {
+    color: #0a6e8e; /* Match color scheme */
+    font-family: 'Avenir', sans-serif; /* Consistent font */
+    font-size: 18px; /* Smaller font size */
+    margin-top: 0; /* Remove top margin */
+    padding-top: 0; /* Remove top padding */
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <h1>CCR Calculator</h1>
+  <input type="range" min="85" max="99" value="98.9" class="slider" id="ccrSlider">
+  <div class="slider-value">CCR: <span id="ccrValue">98.9%</span></div>
+  <div class="slider-value">Denial Rate: <span id="denialRate">1.1%</span></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var slider = document.getElementById("ccrSlider");
+    var ccrOutput = document.getElementById("ccrValue");
+    var denialRateOutput = document.getElementById("denialRate");
+
+    slider.oninput = function() {
+      ccrOutput.innerHTML = this.value + "%";
+      var denialRate = (100 - this.value).toFixed(1);
+      denialRateOutput.innerHTML = denialRate + "%";
+    }
+  });
+</script>
+
+</body>
+</html>
